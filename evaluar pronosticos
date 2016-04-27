@@ -1,0 +1,39 @@
+########################27 de abril###########################################################
+accuracy(partpro)
+accuracy(partnai)
+accuracy(partsnai)
+accuracy(partder)
+pib<-read.csv("C:\\Users\\SALA-C21\\Documents\\basepib.csv", header = FALSE)
+pibts<-ts(pib[,2], start=1993, frequency=4)
+pib
+View(pibts)
+##meanf (part,h)
+pibpro<-meanf(pibts,4)
+plot(pibpro)
+## PART ES LA st
+##el numero de datos a proyectar en este caso elegi h=3
+#########INGENUO####
+pibnai<-naive(pibts,4)
+plot(pibnai)
+rwf(pibts,4) ##ALTERNATIVO
+##INGENUO ESTACIONAL
+pibsnai<-snaive(pibts,4)
+plot(pibsnai)
+##pronostica con base al ultimo periodo de los periodos anteriores
+#####METODO DE LA DERIVA#####
+pibder<-rwf(pibts,4,drift = T) ##DRIFT ES PARA APLICAR EL METODO DE LA DERIVA
+pibder
+plot(pibder)
+Acf(pibts)
+accuracy(pibpro)
+accuracy(pibnai)
+accuracy(pibsnai)
+accuracy(pibder)
+evalmed<-accuracy(pibpro)
+evalnai<-accuracy(pibnai)
+evalsnai<-accuracy(pibsnai)
+evalder<-accuracy(pibder)
+evalmed
+evalnai
+evalsnai
+evalder
